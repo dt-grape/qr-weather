@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {useState} from "react";
+import WeatherContext from "./WeatherContext";
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from "./screens/HomeScreen";
+import CameraComponent from "./components/CameraComponent";
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    const [weatherData, setWeatherData] = useState(null);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <WeatherContext.Provider value={{ weatherData, setWeatherData }}>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Camera" component={CameraComponent} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </WeatherContext.Provider>
+    );
+};
+
+
