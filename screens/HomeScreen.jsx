@@ -5,6 +5,9 @@ import WeatherContext from '../WeatherContext';
 import sunny from "../images/sun.png"
 import cloudy from "../images/cloudy.png"
 import rainy from "../images/rainy.png"
+import snow from "../images/snowflake.png"
+import thunder from "../images/thunder.png"
+import smoke from "../images/smoke.png"
 const HomeScreen = ({ navigation }) => {
   const { weatherData } = useContext(WeatherContext);
 
@@ -16,6 +19,12 @@ const HomeScreen = ({ navigation }) => {
                 return cloudy;
             case 'Rain':
                 return rainy;
+            case 'Snow':
+                return snow;
+            case 'Thunderstorm':
+                return thunder;
+            case 'Smoke':
+                return smoke;
             default:
                 return sunny;
         }
@@ -29,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
           ) : (
               <>
-                  <View className="flex-1 pt-4">
+                  <View className="flex-1 justify-center">
                       <Text className="text-4xl font-medium bg-gray-800 text-white p-4 rounded-2xl self-center">{weatherData.name}</Text>
                         <View className="bg-gray-800 self-center p-6 mt-8 rounded-2xl">
                             <Image source={getWeatherImage(weatherData.weather[0].main)} className="w-32 h-32 self-center" />
